@@ -1,0 +1,71 @@
+*{margin: 0;padding: 0;}
+li{list-style: none;}
+#content{
+    margin: 40px auto;
+    width: 452px;
+    height: 452px;
+    position: relative;
+    
+    #bg,#remove{
+        background: gainsboro;
+        font-size: 0;
+        box-shadow: 0 0 6px gainsboro;
+        border: 1px solid gainsboro;
+        padding: 10px;
+        box-sizing: border-box;
+        
+        li{
+            display: inline-block;
+            vertical-align: top;
+            font-size: 40px;
+            text-align: center;
+            background: white;
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            line-height: 100px;
+            transition: all .3s;
+            
+            &:nth-child(4n){
+                margin-right: 0;
+            }
+            
+            &:nth-child(n+13){
+                margin-bottom: 0;
+            }
+        }
+    }
+    
+    #remove{
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: none;
+        box-shadow: none;
+        border: none;
+        
+        li{
+            position: absolute;
+        }
+    }
+}
+
+.make-line(4,4);
+
+.make-line(@r,@c,@r1:1,@c1:1)when (@r1=<@r){
+    
+    .make-col(@r,4,@r1);
+    
+    .make-col(@r,@c,@r1:@r1,@c1:1)when (@c1=<@c){
+        
+        .remove-@{r1}-@{c1}{
+            transform: translate(@c1*110px-110px,@r1*110px-110px);
+            z-index: 9;
+        }
+        
+        .make-col(@r,@c,@r1,(@c1+1));
+    }
+    
+    .make-line(@r,@c,(@r1+1),@c1);
+}
