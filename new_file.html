@@ -63,17 +63,18 @@
 					moveTop()
 					break;
 				case 39:
-					moveRight()
+					calc();
 					break;
 				case 40:
 					moveBottom()
 					break;
 			}
-			makeEl();
+			
 		}
 		
+		console.log(arr)
 		function moveRight(){
-			$("#remove li").each((index,value)=>{
+			/*$("#remove li").each((index,value)=>{
 				
 				var className=$(value)[0].className,
 					classlist=className.split("-"),
@@ -88,16 +89,35 @@
 				
 				//arr[line][col*1+movecol*1]=0;
 				
-				console.log(arr)
 				
 				if($(`remove-${line}-${col*1+movecol*1}`).length>1){
 					$(`remove-${line}-${col*1+movecol*1}`).each((index,obj)=>{
 						
 					})
 				}
-			})
+			})*/
 			
-			$("")
+			
+		}
+		
+		function calc(){
+			for(let x in arr){
+				//每一行
+				
+				for(let y=arr[x].length-1;y>=0;y--){
+					//每一列
+					
+					for(let z=y-1;z>=0;z--){
+						if((arr[x][y]==arr[x][z])||(arr[x][y]==0&&arr[x][z]!=0)){
+							arr[x][y]=arr[x][y]+arr[x][z];
+							arr[x][z]=0;
+						}
+					}
+				}
+			};
+			
+			makeEl();
+			console.info(arr);
 		}
 	</script>
 </html>
